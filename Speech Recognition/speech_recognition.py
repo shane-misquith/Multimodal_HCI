@@ -1,9 +1,9 @@
-/*
-    Dependencies:
+# /*
+#     Dependencies:
 
-    pip install SpeechRecognition
-    pip install pyaudio
-*/
+#     pip install SpeechRecognition
+#     pip install pyaudio
+# */
 
 import speech_recognition as sr
 
