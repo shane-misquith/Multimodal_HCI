@@ -208,7 +208,7 @@ def main():
     # websocket.enableTrace(True)
     ws = websocket.WebSocketApp(url,
                                 header=headers,
-                                on_message=on_message
+                                on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
     ws.on_open = on_open
