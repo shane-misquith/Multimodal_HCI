@@ -208,7 +208,7 @@ def main():
     # websocket.enableTrace(True)
     ws = websocket.WebSocketApp(url,
                                 header=headers,
-                                on_message=on_message,
+                                on_message=on_message
                                 on_error=on_error,
                                 on_close=on_close)
     ws.on_open = on_open
@@ -218,82 +218,10 @@ def main():
     # 6 seconds in the dedicated thread).
     ws.run_forever()
 
-
-import win32api, win32con
-import keyboard
-
-def mouse_left_click():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
-    time.sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
-
-def mouse_right_click():
-    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,0,0)
-    time.sleep(0.01)
-    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,0,0)
-
-def scroll(clicks=0, delta_x=0, delta_y=0):
-    if clicks > 0:
-        increment = win32con.WHEEL_DELTA
-    else:
-        increment = win32con.WHEEL_DELTA * -1
-    for _ in range(abs(clicks)):
-        win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, delta_x, delta_y, increment, 0)
-        time.sleep(0.05)
-
-def copy_item():
-    mouse_left_click()
-    keyboard.send("ctrl+c")
-        
-def cut_item():
-    mouse_left_click()
-    keyboard.send("ctrl+x")
-            
-def paste_item():
-    keyboard.send("ctrl+v")
-
 if __name__ == "__main__":
     main()
     command = ls[len(ls)-1]
     if(command == 'double click ' or command == 'open '):
             print(command)
-            mouse_left_click()
-            mouse_left_click()
-            
-    elif(command == 'left click ' or command == 'click '):
-        print(command)
-        mouse_left_click()
-        
-    elif(command == 'right click '):
-        print(command)
-        mouse_right_click()
-        
-    elif(command == 'copy '):
-        print(command)
-        copy_item()
-        
-    elif(command == 'cut '):
-        print(command)
-        cut_item()
-        
-    elif(command == 'paste '):
-        print(command)
-        paste_item()
-        
-    elif(command == 'scroll down '):
-        print(command)
-        scroll(-4)
-        
-    elif(command == 'scroll up '):
-        print(command)
-        scroll(4)
-        
-    elif(command == 'zoom in ' or command == 'ZoomIn ' or command == "zoomin "):
-        print(command)
-        scroll(8)
-        
-    elif(command == 'zoom out ' or command == 'ZoomOut ' or command == 'zoomout '):
-        print(command)
-        scroll(-8)
     else:
         print(command+" Command isn't recognised")
